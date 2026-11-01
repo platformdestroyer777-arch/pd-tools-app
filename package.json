@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@huggingface/transformers": "^4.3.2",
     "lucide-react": "^0.468.0",
     "next": "^15.1.6",
     "qrcode": "^1.5.4",
