@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -5,7 +6,7 @@ import QRCode from "qrcode";
 import {
   Search, QrCode, Type, LockKeyhole, Calculator, RefreshCw,
   Ruler, Timer, Clock3, Copy, Check, Download, Wrench, Menu, X,
-  ArrowRight, Sparkles, Github
+  ArrowRight, Sparkles
 } from "lucide-react";
 
 type ToolId = "qr" | "counter" | "password" | "calculator" | "text" | "units" | "stopwatch" | "timer";
@@ -115,7 +116,21 @@ export default function Home() {
       <header className="topbar"><a className="brand" href="#"><span className="brand-mark"><Wrench size={19}/></span><span>PD <b>TOOLS</b><small>PLATFORM DESTROYER</small></span></a><div className="top-links"><span>Ferramentas gratuitas</span><a href="#ferramentas">Explorar <ArrowRight size={14}/></a></div><button className="mobile-toggle" onClick={() => setMobileMenu(!mobileMenu)} aria-label="Abrir menu">{mobileMenu ? <X/> : <Menu/>}</button></header>
       <section className="hero"><div className="hero-glow"/><span className="eyebrow"><Sparkles size={14}/> SIMPLES • GRATUITO • ONLINE</span><h1>Ferramentas para<br/><span>facilitar seu dia.</span></h1><p>O que você precisa, em um só lugar. Acesse ferramentas gratuitas e fáceis de usar, sem complicação.</p><a className="button primary" href="#ferramentas">Explorar ferramentas <ArrowRight size={16}/></a></section>
       <section className="workspace" id="ferramentas"><div className="section-head"><div><span className="eyebrow">CENTRAL DE FERRAMENTAS</span><h2>O que você precisa hoje?</h2></div><div className="search-box"><Search size={17}/><input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar ferramenta..."/></div></div>
-        <div className="workspace-grid"><aside className={`sidebar ${mobileMenu ? "show" : ""}`}><span className="side-label">FERRAMENTAS</span>{filtered.map((tool) => {const Icon = tool.icon;return <button key={tool.id} className={`nav-tool ${active === tool.id ? "selected" : ""}`} onClick={() => {setActive(tool.id);setMobileMenu(false);}}><Icon size={18}/><span>{tool.name}</span></button>})}{filtered.length === 0 && <p className="hint">Nenhuma ferramenta encontrada.</p>}</aside><div className="main-tool"><div className="active-title"><div className="active-icon"><activeTool.icon size={20}/></div><div><span className="eyebrow">{activeTool.category}</span><h3>{activeTool.name}</h3></div></div><ToolContent key={active} id={active}/></div></div>
+        <div className="workspace-grid">
+          <aside className={`sidebar ${mobileMenu ? "show" : ""}`}>
+            <span className="side-label">FERRAMENTAS</span>
+            {filtered.map((tool) => {const Icon = tool.icon;return <button key={tool.id} className={`nav-tool ${active === tool.id ? "selected" : ""}`} onClick={() => {setActive(tool.id);setMobileMenu(false);}}><Icon size={18}/><span>{tool.name}</span></button>})}
+            {filtered.length === 0 && <p className="hint">Nenhuma ferramenta encontrada.</p>}
+            <a className="nav-tool" href="/removedor-fundo">
+              <Sparkles size={18}/>
+              <span>Removedor de Fundo</span>
+            </a>
+          </aside>
+          <div className="main-tool">
+            <div className="active-title"><div className="active-icon"><activeTool.icon size={20}/></div><div><span className="eyebrow">{activeTool.category}</span><h3>{activeTool.name}</h3></div></div>
+            <ToolContent key={active} id={active}/>
+          </div>
+        </div>
       </section>
       <footer><a className="brand footer-brand" href="#"><span className="brand-mark"><Wrench size={17}/></span><span>PD <b>TOOLS</b><small>PLATFORM DESTROYER</small></span></a><p>Feito para a comunidade. Gratuito para todos.</p><span className="copyright">© {new Date().getFullYear()} Platform Destroyer</span></footer>
     </main>
